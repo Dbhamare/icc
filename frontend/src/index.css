@@ -1,0 +1,152 @@
+/* Basic reset to remove margins and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Set body and html to fill the full viewport */
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4; /* Light grey background */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header styling */
+.header {
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Toolbar styling */
+.toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 10px 0;
+  border-radius: 8px;
+  flex-wrap: wrap;
+}
+
+.tool-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 18px;
+  margin: 0 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tool-button:hover {
+  background-color: #45a049;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+.tool-button:active {
+  background-color: #388e3c;
+}
+
+/* Clear button */
+.clear-button {
+  background-color: #f44336;
+}
+
+.clear-button:hover {
+  background-color: #e53935;
+}
+
+/* Size sliders for tools */
+.tool-size-slider {
+  margin: 0 10px;
+  width: 150px;
+}
+
+.tool-size-label {
+  color: #333;
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+/* Canvas container styling */
+.whiteboard-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  position: relative;
+  margin: 20px 0;
+}
+
+/* Main canvas styling */
+canvas {
+  background-color: white;
+  border: 2px solid #ddd;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  cursor: crosshair; /* Default cursor for drawing */
+  width: 100%;
+  max-width: 80vw; /* Restrict canvas size */
+  height: auto;
+  min-height: 400px;
+  border-radius: 8px;
+}
+
+/* Footer styling */
+.footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  font-size: 14px;
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.footer a {
+  color: #f1f1f1;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* Cursor styles for drawing and erasing */
+.canvas-drawing {
+  cursor: crosshair; /* Crosshair cursor for drawing */
+}
+
+.canvas-erasing {
+  cursor: move; /* Move cursor for erasing (since erasing is similar to dragging) */
+}
+
+/* Responsive design improvements */
+@media (max-width: 768px) {
+  .toolbar {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .tool-button {
+    margin-bottom: 10px;
+  }
+
+  canvas {
+    max-width: 100%;
+    min-height: 300px;
+  }
+}
+

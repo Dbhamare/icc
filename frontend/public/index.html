@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minimalistic Whiteboard</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <!-- Header section -->
+  <header class="header">
+    <h1>Minimalistic Whiteboard</h1>
+  </header>
+
+  <!-- Toolbar with drawing tools and color picker -->
+  <div class="toolbar">
+    <button class="tool-button" id="drawTool">Draw</button>
+    <button class="tool-button" id="eraseTool">Erase</button>
+    <input type="color" id="colorPicker" class="tool-button" title="Pick a color" value="#000000">
+    <button class="tool-button clear-button" id="clearCanvas">Clear</button>
+    <!-- Size sliders for draw and erase tools -->
+    <label for="drawSize" class="tool-size-label">Draw Size</label>
+    <input type="range" id="drawSize" min="1" max="10" value="5" class="tool-size-slider">
+    <label for="eraseSize" class="tool-size-label">Erase Size</label>
+    <input type="range" id="eraseSize" min="5" max="30" value="10" class="tool-size-slider">
+  </div>
+
+  <!-- Whiteboard canvas container -->
+  <div class="whiteboard-container">
+    <canvas id="whiteboard"></canvas>
+  </div>
+
+  <!-- Footer with links or credits -->
+  <footer class="footer">
+    <p>Designed by Darshan</p>
+    <a href="https://github.com/your-repo" target="_blank">GitHub</a>
+  </footer>
+
+  <!-- Include Socket.io -->
+  <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+
+  <!-- JavaScript -->
+  <script src="index.js"></script>
+</body>
+</html>
