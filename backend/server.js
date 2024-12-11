@@ -31,10 +31,31 @@ app.get("/", (req, res) => {
 io.on("connection", (socket) => {
     console.log("User connected");
 
+    // Send stored canvas data to the newly connected user
+    redisPublisher.get("canvasState", (err, canvasState) => {
+        if (err) {
+            console.error("Error retrieving canvas state from Redis:", err);
+        } else if (canvasState) {
+            socket.emit("canvasState", JSON.parse(canvasState)); // Send canvas state to the new user
+        }
+    });
+
     // Handle drawing events from clients
     socket.on("draw", (data) => {
         console.log("Draw event received from client:", data);
-        redisPublisher.publish("draw-channel", JSON.stringify(data)); // Publish to Redis channel
+        
+        // Update Redis with the latest canvas state
+        redisPublisher.get("canvasState", (err, canvasState) => {
+            let updatedCanvasState = [];
+            if (!err && canvasState) {
+                updatedCanvasState = JSON.parse(canvasState);
+            }
+            updatedCanvasState.push(data); // Append new draw event
+            redisPublisher.set("canvasState", JSON.stringify(updatedCanvasState)); // Save updated state
+        });
+
+        // Publish to Redis channel for real-time updates
+        redisPublisher.publish("draw-channel", JSON.stringify(data));
     });
 
     // Sync updates from Redis to connected clients

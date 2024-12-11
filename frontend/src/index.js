@@ -28,6 +28,28 @@ canvas.height = window.innerHeight * 0.7;
 ctx.strokeStyle = drawingColor;
 ctx.lineWidth = lineWidth;
 
+// Fetch canvas state from the server on connection
+socket.on("canvasState", (state) => {
+  console.log("Received canvas state:", state);
+  if (state) {
+    state.forEach((action) => {
+      if (action.type === "draw") {
+        ctx.beginPath();
+        ctx.moveTo(action.x1, action.y1);
+        ctx.lineTo(action.x2, action.y2);
+        ctx.strokeStyle = action.color;
+        ctx.lineWidth = action.width;
+        ctx.stroke();
+        ctx.closePath();
+      } else if (action.type === "erase") {
+        ctx.clearRect(action.x1 - action.width / 2, action.y1 - action.width / 2, action.width, action.width);
+      } else if (action.type === "clear") {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    });
+  }
+});
+
 // Event listener for mouse down (start drawing or erasing)
 canvas.addEventListener('mousedown', (e) => {
   drawing = true;
